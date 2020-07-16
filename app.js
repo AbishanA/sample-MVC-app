@@ -9,6 +9,9 @@ app.enigne(`handlebars`, exphbs());
 app.set(`view engine`, `handlebars`);
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// LOAD PRODUCT MODEL
+const productModel = require("./models/product.js")
+
 // ROUTES
 app.get("/", (req, res)=>
 {
@@ -21,7 +24,10 @@ app.get("/", (req, res)=>
 // CONTACT ROUTES
 app.get("/contact", (req, res)=>
 {
-    res.render("general/contact");
+    res.render("general/contact", 
+    {
+        title: "Contact Us"
+    });
 });
 
 app.post("/contact", (req, res)=>
@@ -32,23 +38,28 @@ app.post("/contact", (req, res)=>
 // LIST PRODUCTS ROUTES
 app.get("/product/list", (req, res)=>
 {
-    res.render("products/productList");
-});
-
-app.post("/product/list", (req, res)=>
-{
-    res.render("products/productAdd");
+    res.render("products/productList", 
+    {
+        title: "Product List",
+        products: productModel.getAllProducts()
+    });
 });
 
 // ADD PRODUCTS ROUTES
 app.get("/product/add", (req, res)=>
 {
-    res.render();
+    res.render("products/productAdd", 
+        {
+            title: "Home Page"
+        });
 });
 
 app.post("/product/add", (req, res)=>
 {
-    res.render();
+    res.render("products/productAdd", 
+        {
+            title: "Home Page"
+        });
 });
 
 const PORT = process.env.PORT || 3000;
