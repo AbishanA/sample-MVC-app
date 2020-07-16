@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 // MIDDLEWARE
 const app = express();
 app.use(express.static("public"));
-app.enigne(`handlebars`, exphbs());
+app.engine(`handlebars`, exphbs());
 app.set(`view engine`, `handlebars`);
 app.use(bodyParser.urlencoded({ extended: false }));
 
